@@ -16,6 +16,8 @@ Obj = {
     sh = 1, -- height
     sfh = false, -- flip horizontal
     sfv = false, -- flip vertical
+    ox = 0,
+    oy = 0,
 
     new=function(self, tbl)
         tbl=tbl or {}
