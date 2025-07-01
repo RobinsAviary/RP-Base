@@ -43,7 +43,7 @@ Obj = {
     end,
 
     drawself=function(self)
-        spr(self.si, self.x - self.ox, self.y - self.oy, self.sw, self.sh, self.sfh, self.sfv)
+        spr(self.si, flr(self.x - self.ox), flr(self.y - self.oy), self.sw, self.sh, self.sfh, self.sfv)
     end,
 
     collision=function(self,other)
