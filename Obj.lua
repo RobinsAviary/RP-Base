@@ -43,7 +43,7 @@ Obj = {
     end,
 
     drawself=function(self)
-        spr(self.si, self.x, self.y, self.sw, self.sh, self.sfh, self.sfv)
+        spr(self.si, self.x + self.ox, self.y + self.oy, self.sw, self.sh, self.sfh, self.sfv)
     end,
 
     collision=function(self,other)
@@ -67,3 +67,10 @@ Obj = {
     end,
     
 }
+
+function iteratecollection(coll)
+	for item in all(coll) do
+		item:step()
+		item:draw()
+	end
+end
