@@ -58,6 +58,19 @@ Obj = {
         return 64 - (self.sh * 4)
     end,
 
+    centerx=function(self)
+        self.x = self:getcenterx()
+    end,
+
+    centery=function(self)
+        self.y = self:getcentery()
+    end,
+
+    center=function(self)
+        centerx()
+        centery()
+    end,
+
     getwidth=function(self)
         return self.sw * 8
     end,
