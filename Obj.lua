@@ -1,89 +1,35 @@
-Obj = {
-    x = 0,
-    y = 0,
-    xspd = 0,
-    yspd = 0,
-    collflag = false,
-    coll = {
-        x = 0,
-        y = 0,
-        w = 0,
-        h = 0,
-    },
-    -- Sprite flags
-    si = 0, -- index
-    sw = 1, -- width
-    sh = 1, -- height
-    sfh = false, -- flip horizontal
-    sfv = false, -- flip vertical
-    ox = 0,
-    oy = 0,
+function ObjMake(x, y, s)
+    local o={
+        p=Vec2Make(),
+        s=s or nil,
 
-    new=function(self, tbl)
-        tbl=tbl or {}
-            setmetatable(tbl, {
-                __index=self,
+    }
+    return o
+end
 
-                
-            })
-        return tbl
-    end,
+function ObjStep()
 
-    step=function(self)
-        
-    end,
+end
 
-    move=function(self)
-        self.x += self.xspd
-        self.y += self.yspd
-    end,
+function ObjDraw()
 
-    draw=function(self)
-        
-    end,
+end
 
-    drawself=function(self)
-        spr(self.si, flr(self.x - self.ox), flr(self.y - self.oy), self.sw, self.sh, self.sfh, self.sfv)
-    end,
+function DrawSelf(obj)
+    if obj.s != nil then
+        local p=obj.p
+        local s=obj.s
+        local ss=s.s
+        local so=s.o
+        spr(s.i, p.x - so.x, p.y - so.y, ss.x, ss.y)
+    end
+end
 
-    collision=function(self,other)
-
-    end,
-
-    getcenterx=function(self)
-        return 64 - (self.sw * 4)
-    end,
-
-    getcentery=function(self)
-        return 64 - (self.sh * 4)
-    end,
-
-    centerx=function(self)
-        self.x = self:getcenterx()
-    end,
-
-    centery=function(self)
-        self.y = self:getcentery()
-    end,
-
-    center=function(self)
-        centerx()
-        centery()
-    end,
-
-    getwidth=function(self)
-        return self.sw * 8
-    end,
-
-    getheight=function(self)
-        return self.sh * 8
-    end,
-    
-}
-
-function iteratecollection(coll)
-	for item in all(coll) do
-		item:step()
-		item:draw()
-	end
+function IterateCollection(c)
+    for i in all(c) do
+        ObjStep(i)
+    end
+    for i in all(c) do
+        ObjDraw(i)
+    end
 end
