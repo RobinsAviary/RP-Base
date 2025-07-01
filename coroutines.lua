@@ -9,3 +9,7 @@ function iteratecoroutines()
 		end
 	end
 end
+
+function async(func)
+	add(Coroutines, cocreate(func))
+end
