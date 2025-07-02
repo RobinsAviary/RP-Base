@@ -1,7 +1,7 @@
 function DrawSelf(self)
     if self["s"] != nil then
-        local s = self.s
-        local p=self.p-- Position
+        local s = self.s -- Sprite
+        local p=self.p -- Position
         local ss=s.s -- Size
         local so=s.o -- Origin
         spr(s.i, p.x - so.x, p.y - so.y, ss.x, ss.y)
@@ -14,15 +14,17 @@ Obj.proto = {
     s=nil,
     draw=DrawSelf,
     step=nil,
+    spd=Vec2Make(),
 }
-Obj.mt = {}
 
 function ObjMake(t)
-    setmetatable(t, Obj.mt)
-    Obj.mt.__index = function(t,k)
-       return Obj.proto[k]
+    local t = t or {} -- Allows user to pass in values
+    local copy = deepcopy(Obj.proto) -- Copy the prototype table to a new table
+    -- Update copy with values from t
+    for k,v in pairs(t) do
+        copy[k] = v
     end
-    return t
+    return copy -- Return the new object!
 end
 
 function IterateCollection(c)
@@ -49,4 +51,12 @@ end
 function ObjCenter(o)
     ObjCenterX()
     ObjCenterY()
+end
+
+function ObjMove(self)
+    self.p = Vec2Add(self.p, self.spd)
+end
+
+function ObjPosOrigin(obj)
+    return Vec2Add(obj.p, obj.s.o)
 end
