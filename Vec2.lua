@@ -5,6 +5,13 @@ function Vec2Make(x, y)
     }
 end
 
+function Vec2MakeS(xy)
+    return {
+        x = xy or 0,
+        y = xy or 0,
+    }
+end
+
 function Vec2Add(vec1, vec2)
     return Vec2Make(vec1.x + vec2.x, vec1.y + vec2.y)
 end
