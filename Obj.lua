@@ -103,3 +103,9 @@ function ObjLimitBounds(obj, bounds)
     obj.p.x = Clamp(obj.p.x, bounds.x + hullOffset.x, bounds.x + bounds.w - hullOffset.x)
     obj.p.y = Clamp(obj.p.y, bounds.y + hullOffset.y, bounds.y + bounds.h - hullOffset.y)
 end
+
+function TableAdd(t, tToAdd)
+    for k,v in pairs(tToAdd) do
+        t[k] = v
+    end
+end
