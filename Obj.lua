@@ -1,22 +1,23 @@
+function DrawSprite(s, x, y)
+    spr(s.i, x - s.o.x, y - s.o.y, s.s.x, s.s.y, s.fh, s.fv)
+end
+
 function DrawSelf(self)
     if self["s"] != nil then
-        local s = self.s -- Sprite
-        local p=self.p -- Position
-        local ss=s.s -- Size
-        local so=s.o -- Origin
-        spr(s.i, p.x - so.x, p.y - so.y, ss.x, ss.y, s.fh, s.fv)
+        DrawSprite(self.s, self.p.x, self.p.y)
     end
 end
 
 Obj = {}
 Obj.proto = {
-    p=Vec2Make(),
-    s=nil,
-    draw=DrawSelf,
-    step=nil,
-    spd=Vec2Make(),
-    layer=nil,
-    coroutines=nil,
+    -- Values that can be set
+    p=Vec2Make(), -- Position
+    s=nil, -- Sprite
+    draw=DrawSelf, -- Draw Event
+    step=nil, -- Step Event
+    spd=Vec2Make(), -- 2D Speed
+    layer=nil, -- Visual Layer
+    coroutines=nil, -- ObjCoroutines
 }
 
 function ObjMake(t)
@@ -96,8 +97,9 @@ function IterateObjCoroutines(coll)
     end
 end
 
-function DrawHull(obj, color)
-    local x1 = obj.p.x + obj.hull.x
-    local y1 = obj.p.y + obj.hull.y
-    rect(x1, y1, x1 + obj.hull.w - 1, y1 + obj.hull.h - 1, color)
+function ObjLimitBounds(obj, bounds)
+    local hull = obj.hull
+    local hullOffset = Vec2Make(hull.x + hull.w, hull.y + hull.h)
+    obj.p.x = Clamp(obj.p.x, bounds.x + hullOffset.x, bounds.x + bounds.w - hullOffset.x)
+    obj.p.y = Clamp(obj.p.y, bounds.y + hullOffset.y, bounds.y + bounds.h - hullOffset.y)
 end
