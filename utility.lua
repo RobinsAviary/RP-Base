@@ -1,3 +1,5 @@
+-- Utility
+
 function stween(val, goal, amnt)
 	return val + (goal - val) * amnt
 end

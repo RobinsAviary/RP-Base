@@ -1,3 +1,5 @@
+-- Obj
+
 function DrawSprite(s, x, y)
     spr(s.i, x - s.o.x, y - s.o.y, s.s.x, s.s.y, s.fh, s.fv)
 end

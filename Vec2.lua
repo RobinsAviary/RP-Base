@@ -1,3 +1,5 @@
+-- Vec2
+
 function Vec2Make(x, y)
     return {
         x = x or 0,

@@ -1,3 +1,5 @@
+-- Sprite
+
 function SpriteMake(i, s, o, fh, fv)
     return {
         i=i or 0, -- Index

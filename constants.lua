@@ -1,3 +1,5 @@
+-- Constants
+
 ScreenSize = 128
 Center = ScreenSize / 2
 
